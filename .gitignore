@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.wasm
+*.exe
+
+# Environment files
+.env
+.env.local
+.env.production
+credentials/
+
+# Large genomic data files
+data/*.fastq
+data/*.fasta
+data/*.vcf
+data/*.bam
+data/*.sam
+*.fastq.gz
+*.fasta.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+coverage/
+*.coverprofile
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Go
+*.exe
+*.test
+*.prof
+go.work
+go.work.sum
+
+# Keep sample files
+!data/ecoli_genome.fasta
+!data/cosmic_signatures.csv
