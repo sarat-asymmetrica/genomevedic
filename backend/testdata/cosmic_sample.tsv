@@ -1,0 +1,95 @@
+# COSMIC Sample Database - Cancer Mutation Hotspots
+# Format: Chromosome\tPosition\tRef\tAlt\tType\tGene\tSamples\tSignificance\tFrequency
+# Real cancer genes: TP53, KRAS, EGFR, PIK3CA, BRAF, APC, BRCA1, BRCA2
+#
+# TP53 hotspots (chr17, most mutated gene in cancer)
+chr17	7577534	C	T	Missense	TP53	1247	Pathogenic	0.042
+chr17	7577535	G	A	Missense	TP53	891	Pathogenic	0.031
+chr17	7577538	C	T	Missense	TP53	672	Pathogenic	0.023
+chr17	7577539	C	T	Nonsense	TP53	534	Pathogenic	0.018
+chr17	7577548	G	A	Missense	TP53	423	Pathogenic	0.014
+chr17	7577550	C	G	Missense	TP53	398	Pathogenic	0.013
+chr17	7577551	C	T	Missense	TP53	367	Pathogenic	0.012
+chr17	7577552	C	A	Missense	TP53	289	Pathogenic	0.010
+chr17	7577554	G	T	Missense	TP53	256	Pathogenic	0.009
+chr17	7577556	C	T	Missense	TP53	234	Pathogenic	0.008
+chr17	7577558	G	A	Missense	TP53	198	Likely_Pathogenic	0.007
+chr17	7577560	C	T	Missense	TP53	176	Likely_Pathogenic	0.006
+chr17	7577570	G	A	Missense	TP53	145	Likely_Pathogenic	0.005
+chr17	7577580	C	T	Missense	TP53	123	Likely_Pathogenic	0.004
+chr17	7577590	G	T	Missense	TP53	98	Uncertain	0.003
+#
+# KRAS hotspots (chr12, codon 12/13 mutations)
+chr12	25398284	C	T	Missense	KRAS	987	Pathogenic	0.035
+chr12	25398285	C	A	Missense	KRAS	856	Pathogenic	0.030
+chr12	25398286	G	A	Missense	KRAS	743	Pathogenic	0.026
+chr12	25398287	G	T	Missense	KRAS	621	Pathogenic	0.022
+chr12	25398288	C	T	Missense	KRAS	534	Pathogenic	0.019
+chr12	25398289	G	A	Missense	KRAS	467	Pathogenic	0.016
+chr12	25398290	C	A	Missense	KRAS	398	Pathogenic	0.014
+chr12	25398291	C	T	Missense	KRAS	345	Pathogenic	0.012
+chr12	25398292	G	T	Missense	KRAS	298	Likely_Pathogenic	0.010
+chr12	25398293	C	G	Missense	KRAS	256	Likely_Pathogenic	0.009
+chr12	25398294	G	A	Missense	KRAS	213	Likely_Pathogenic	0.007
+chr12	25398295	C	T	Missense	KRAS	187	Likely_Pathogenic	0.006
+#
+# EGFR hotspots (chr7, lung cancer)
+chr7	55241707	T	G	Missense	EGFR	678	Pathogenic	0.024
+chr7	55241708	C	T	Missense	EGFR	589	Pathogenic	0.021
+chr7	55241709	G	A	Missense	EGFR	512	Pathogenic	0.018
+chr7	55241710	A	T	Missense	EGFR	456	Pathogenic	0.016
+chr7	55241711	C	A	Missense	EGFR	398	Pathogenic	0.014
+chr7	55241712	G	T	Missense	EGFR	345	Likely_Pathogenic	0.012
+chr7	55241713	T	C	Missense	EGFR	298	Likely_Pathogenic	0.010
+chr7	55241714	C	G	Missense	EGFR	256	Likely_Pathogenic	0.009
+chr7	55241720	G	A	Inframe	EGFR	423	Pathogenic	0.015
+chr7	55241721	A	T	Inframe	EGFR	387	Pathogenic	0.013
+#
+# PIK3CA hotspots (chr3, helical/kinase domains)
+chr3	178936091	G	A	Missense	PIK3CA	534	Pathogenic	0.019
+chr3	178936092	C	T	Missense	PIK3CA	467	Pathogenic	0.016
+chr3	178936093	A	G	Missense	PIK3CA	398	Pathogenic	0.014
+chr3	178936094	T	C	Missense	PIK3CA	345	Pathogenic	0.012
+chr3	178936095	G	T	Missense	PIK3CA	298	Likely_Pathogenic	0.010
+chr3	178936096	C	A	Missense	PIK3CA	256	Likely_Pathogenic	0.009
+chr3	178936097	A	T	Missense	PIK3CA	213	Likely_Pathogenic	0.007
+#
+# BRAF hotspots (chr7, V600E mutation)
+chr7	140453136	A	T	Missense	BRAF	1534	Pathogenic	0.053
+chr7	140453137	T	G	Missense	BRAF	234	Pathogenic	0.008
+chr7	140453138	G	A	Missense	BRAF	187	Pathogenic	0.006
+chr7	140453139	C	T	Missense	BRAF	156	Likely_Pathogenic	0.005
+chr7	140453140	A	G	Missense	BRAF	123	Likely_Pathogenic	0.004
+#
+# APC hotspots (chr5, colorectal cancer)
+chr5	112175770	C	T	Nonsense	APC	456	Pathogenic	0.016
+chr5	112175771	G	A	Frameshift	APC	398	Pathogenic	0.014
+chr5	112175772	T	A	Frameshift	APC	345	Pathogenic	0.012
+chr5	112175773	C	G	Nonsense	APC	298	Pathogenic	0.010
+chr5	112175774	A	T	Frameshift	APC	256	Likely_Pathogenic	0.009
+chr5	112175775	G	T	Nonsense	APC	213	Likely_Pathogenic	0.007
+chr5	112175776	C	A	Frameshift	APC	187	Likely_Pathogenic	0.006
+#
+# BRCA1 hotspots (chr17, breast/ovarian cancer)
+chr17	41244936	A	G	Missense	BRCA1	298	Pathogenic	0.010
+chr17	41244937	T	C	Missense	BRCA1	267	Pathogenic	0.009
+chr17	41244938	G	A	Frameshift	BRCA1	234	Pathogenic	0.008
+chr17	41244939	C	T	Nonsense	BRCA1	213	Pathogenic	0.007
+chr17	41244940	A	T	Frameshift	BRCA1	187	Likely_Pathogenic	0.006
+chr17	41244941	G	C	Missense	BRCA1	156	Likely_Pathogenic	0.005
+chr17	41244942	T	A	Missense	BRCA1	134	Uncertain	0.004
+#
+# BRCA2 hotspots (chr13, breast/ovarian cancer)
+chr13	32914438	C	T	Missense	BRCA2	267	Pathogenic	0.009
+chr13	32914439	G	A	Frameshift	BRCA2	234	Pathogenic	0.008
+chr13	32914440	A	T	Nonsense	BRCA2	213	Pathogenic	0.007
+chr13	32914441	T	C	Frameshift	BRCA2	187	Likely_Pathogenic	0.006
+chr13	32914442	C	G	Missense	BRCA2	156	Likely_Pathogenic	0.005
+#
+# Additional benign/uncertain variants
+chr1	12345678	C	T	Synonymous	GENE1	45	Benign	0.001
+chr2	23456789	G	A	Missense	GENE2	67	Likely_Benign	0.002
+chr3	34567890	A	T	Missense	GENE3	89	Uncertain	0.003
+chr4	45678901	T	C	Synonymous	GENE4	34	Benign	0.001
+chr5	56789012	C	G	Missense	GENE5	56	Likely_Benign	0.002
+chr6	67890123	G	T	Missense	GENE6	78	Uncertain	0.002

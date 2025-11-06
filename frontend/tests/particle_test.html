@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Renderer Test - GenomeVedic.ai</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            color: #0f0;
+        }
+        canvas {
+            display: block;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border: 1px solid #0f0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border: 1px solid #0f0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="info">
+        <strong>GenomeVedic.ai - Particle Renderer Test</strong><br>
+        Particles: <span id="particleCount">0</span><br>
+        FPS: <span id="fps">0</span><br>
+        Frame Time: <span id="frameTime">0</span>ms<br>
+        Camera Position: <span id="camPos">0, 0, 0</span>
+    </div>
+    <div id="controls">
+        <strong>Controls:</strong><br>
+        Left Drag: Rotate camera<br>
+        Scroll: Zoom in/out<br>
+        WASD: Move camera<br>
+        Q/E: Move up/down<br>
+        R: Reset camera<br>
+        Shift: Move faster
+    </div>
+
+    <script type="module">
+        import { QuaternionCamera } from '../src/camera/quaternion_camera.js';
+        import { MouseControls } from '../src/camera/mouse_controls.js';
+        import { KeyboardControls } from '../src/camera/keyboard_controls.js';
+
+        const canvas = document.getElementById('canvas');
+        const infoParticleCount = document.getElementById('particleCount');
+        const infoFPS = document.getElementById('fps');
+        const infoFrameTime = document.getElementById('frameTime');
+        const infoCamPos = document.getElementById('camPos');
+
+        // Resize canvas to window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Initialize WebGL2
+        const gl = canvas.getContext('webgl2');
+        if (!gl) {
+            alert('WebGL 2.0 not supported!');
+            throw new Error('WebGL 2.0 not available');
+        }
+
+        // Create camera
+        const camera = new QuaternionCamera(60, canvas.width / canvas.height, 0.1, 100000);
+        camera.position = [0, 0, 2000];
+
+        // Setup controls
+        const mouseControls = new MouseControls(camera, canvas);
+        const keyboardControls = new KeyboardControls(camera);
+
+        // Generate test particles (50K particles in a spiral galaxy pattern)
+        function generateParticles(count) {
+            const particles = [];
+            const goldenAngle = 137.5 * Math.PI / 180;
+
+            for (let i = 0; i < count; i++) {
+                const t = i / count;
+                const radius = 1000 * Math.sqrt(t);
+                const angle = i * goldenAngle;
+                const height = (Math.random() - 0.5) * 200;
+
+                // Position
+                const x = radius * Math.cos(angle);
+                const z = radius * Math.sin(angle);
+                const y = height;
+
+                // Color (Vedic-style: based on position)
+                const hue = (t * 360) % 360;
+                const rgb = hslToRgb(hue, 0.8, 0.5);
+
+                particles.push({
+                    x, y, z,
+                    r: rgb[0],
+                    g: rgb[1],
+                    b: rgb[2],
+                    a: 0.8,
+                    size: 5.0 + Math.random() * 3.0
+                });
+            }
+
+            return particles;
+        }
+
+        // HSL to RGB conversion
+        function hslToRgb(h, s, l) {
+            h /= 360;
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+
+            const r = hueToRgb(p, q, h + 1/3);
+            const g = hueToRgb(p, q, h);
+            const b = hueToRgb(p, q, h - 1/3);
+
+            return [r, g, b];
+        }
+
+        function hueToRgb(p, q, t) {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1/6) return p + (q - p) * 6 * t;
+            if (t < 1/2) return q;
+            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        // Compile shader (inline for test)
+        function compileShader(source, type) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+                throw new Error('Shader compilation failed');
+            }
+
+            return shader;
+        }
+
+        // Vertex shader
+        const vertexShaderSource = `#version 300 es
+            precision highp float;
+
+            in vec3 a_instancePosition;
+            in vec4 a_instanceColor;
+            in float a_instanceSize;
+
+            uniform mat4 u_viewProjection;
+            uniform vec3 u_cameraPosition;
+
+            out vec4 v_color;
+            out float v_size;
+
+            void main() {
+                vec4 worldPos = vec4(a_instancePosition, 1.0);
+                gl_Position = u_viewProjection * worldPos;
+
+                float distance = length(a_instancePosition - u_cameraPosition);
+                float distanceFactor = 1.0 / (1.0 + distance * 0.0001);
+                float baseSize = a_instanceSize * distanceFactor;
+                gl_PointSize = clamp(baseSize, 1.0, 64.0);
+
+                v_color = a_instanceColor;
+                v_size = gl_PointSize;
+            }
+        `;
+
+        // Fragment shader
+        const fragmentShaderSource = `#version 300 es
+            precision highp float;
+
+            in vec4 v_color;
+            in float v_size;
+
+            out vec4 fragColor;
+
+            void main() {
+                vec2 coord = gl_PointCoord - vec2(0.5);
+                float dist = length(coord);
+
+                if (dist > 0.5) discard;
+
+                float edgeWidth = 2.0 / v_size;
+                float alpha = 1.0 - smoothstep(0.5 - edgeWidth, 0.5, dist);
+                float brightness = 1.0 - dist * 0.3;
+
+                fragColor = vec4(v_color.rgb * brightness, v_color.a * alpha);
+            }
+        `;
+
+        // Create program
+        const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+        const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error('Program linking error:', gl.getProgramInfoLog(program));
+            throw new Error('Program linking failed');
+        }
+
+        // Generate particles
+        const particles = generateParticles(50000);
+        infoParticleCount.textContent = particles.length.toLocaleString();
+
+        // Setup buffers
+        const maxParticles = particles.length;
+        const positions = new Float32Array(maxParticles * 3);
+        const colors = new Float32Array(maxParticles * 4);
+        const sizes = new Float32Array(maxParticles);
+
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            positions[i * 3 + 0] = p.x;
+            positions[i * 3 + 1] = p.y;
+            positions[i * 3 + 2] = p.z;
+
+            colors[i * 4 + 0] = p.r;
+            colors[i * 4 + 1] = p.g;
+            colors[i * 4 + 2] = p.b;
+            colors[i * 4 + 3] = p.a;
+
+            sizes[i] = p.size;
+        }
+
+        const vao = gl.createVertexArray();
+        gl.bindVertexArray(vao);
+
+        // Position buffer
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+        const positionLoc = gl.getAttribLocation(program, 'a_instancePosition');
+        gl.enableVertexAttribArray(positionLoc);
+        gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribDivisor(positionLoc, 1);
+
+        // Color buffer
+        const colorBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
+
+        const colorLoc = gl.getAttribLocation(program, 'a_instanceColor');
+        gl.enableVertexAttribArray(colorLoc);
+        gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribDivisor(colorLoc, 1);
+
+        // Size buffer
+        const sizeBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, sizes, gl.STATIC_DRAW);
+
+        const sizeLoc = gl.getAttribLocation(program, 'a_instanceSize');
+        gl.enableVertexAttribArray(sizeLoc);
+        gl.vertexAttribPointer(sizeLoc, 1, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribDivisor(sizeLoc, 1);
+
+        gl.bindVertexArray(null);
+
+        // Setup blending
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        gl.enable(gl.DEPTH_TEST);
+        gl.enable(gl.VERTEX_PROGRAM_POINT_SIZE);
+
+        // Animation loop
+        let lastTime = performance.now();
+        let frameCount = 0;
+        let fpsTime = 0;
+
+        function render(currentTime) {
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+
+            // Update FPS counter
+            frameCount++;
+            fpsTime += deltaTime;
+            if (fpsTime >= 1.0) {
+                infoFPS.textContent = Math.round(frameCount / fpsTime);
+                frameCount = 0;
+                fpsTime = 0;
+            }
+
+            // Update controls
+            keyboardControls.update(deltaTime);
+            camera.update(deltaTime);
+
+            // Update camera aspect ratio on resize
+            const aspect = canvas.width / canvas.height;
+            if (camera.aspect !== aspect) {
+                camera.setAspect(aspect);
+            }
+
+            // Update info
+            infoFrameTime.textContent = (deltaTime * 1000).toFixed(2);
+            infoCamPos.textContent = `${camera.position[0].toFixed(0)}, ${camera.position[1].toFixed(0)}, ${camera.position[2].toFixed(0)}`;
+
+            // Clear
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            // Render particles
+            gl.useProgram(program);
+
+            const vpLoc = gl.getUniformLocation(program, 'u_viewProjection');
+            gl.uniformMatrix4fv(vpLoc, false, camera.viewProjectionMatrix);
+
+            const camPosLoc = gl.getUniformLocation(program, 'u_cameraPosition');
+            gl.uniform3fv(camPosLoc, camera.position);
+
+            gl.bindVertexArray(vao);
+            gl.drawArraysInstanced(gl.POINTS, 0, 1, particles.length);
+            gl.bindVertexArray(null);
+
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+
+        console.log('Particle test initialized successfully!');
+        console.log(`Rendering ${particles.length.toLocaleString()} particles with GPU instancing`);
+    </script>
+</body>
+</html>

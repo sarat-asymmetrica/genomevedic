@@ -1,0 +1,123 @@
+# GTF Sample File - Human Cancer Genes
+# Format: Seqname\tSource\tFeature\tStart\tEnd\tScore\tStrand\tFrame\tAttributes
+# Real genes: TP53, KRAS, EGFR, BRCA1, BRCA2, PIK3CA, BRAF, APC
+#
+# TP53 (chr17:7,571,720-7,590,868) - Most mutated gene in cancer
+chr17	GENCODE	gene	7571720	7590868	.	-	.	gene_id "ENSG00000141510"; gene_name "TP53"; gene_type "protein_coding";
+chr17	GENCODE	transcript	7571720	7590868	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7571720	7571750	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "11";
+chr17	GENCODE	CDS	7571720	7571748	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7577000	7577155	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "10";
+chr17	GENCODE	CDS	7577000	7577155	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7577499	7577608	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "9";
+chr17	GENCODE	CDS	7577499	7577608	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7578177	7578289	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "8";
+chr17	GENCODE	CDS	7578177	7578289	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7578371	7578554	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "7";
+chr17	GENCODE	CDS	7578371	7578554	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	start_codon	7578552	7578554	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7579312	7579590	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "6";
+chr17	GENCODE	CDS	7579312	7579590	.	-	2	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7579700	7579721	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "5";
+chr17	GENCODE	CDS	7579700	7579721	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	exon	7579839	7579940	.	-	.	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53"; exon_number "4";
+chr17	GENCODE	CDS	7579839	7579940	.	-	1	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+chr17	GENCODE	stop_codon	7571724	7571726	.	-	0	gene_id "ENSG00000141510"; transcript_id "ENST00000269305"; gene_name "TP53";
+#
+# KRAS (chr12:25,204,789-25,250,936) - RAS pathway
+chr12	GENCODE	gene	25204789	25250936	.	-	.	gene_id "ENSG00000133703"; gene_name "KRAS"; gene_type "protein_coding";
+chr12	GENCODE	transcript	25204789	25250936	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25204789	25205074	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "6";
+chr12	GENCODE	CDS	25204789	25205074	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25209783	25209911	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "5";
+chr12	GENCODE	CDS	25209783	25209911	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25215437	25215560	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "4";
+chr12	GENCODE	CDS	25215437	25215560	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25227234	25227412	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "3";
+chr12	GENCODE	CDS	25227234	25227412	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25245274	25245395	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "2";
+chr12	GENCODE	CDS	25245274	25245395	.	-	1	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	start_codon	25245350	25245352	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	exon	25249364	25250936	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS"; exon_number "1";
+chr12	GENCODE	five_prime_UTR	25249400	25250936	.	-	.	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+chr12	GENCODE	stop_codon	25204791	25204793	.	-	0	gene_id "ENSG00000133703"; transcript_id "ENST00000311936"; gene_name "KRAS";
+#
+# EGFR (chr7:55,019,032-55,211,628) - Lung cancer
+chr7	GENCODE	gene	55019032	55211628	.	+	.	gene_id "ENSG00000146648"; gene_name "EGFR"; gene_type "protein_coding";
+chr7	GENCODE	transcript	55019032	55211628	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	exon	55019032	55019274	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR"; exon_number "1";
+chr7	GENCODE	five_prime_UTR	55019032	55019210	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	start_codon	55019211	55019213	.	+	0	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	CDS	55019211	55019274	.	+	0	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	exon	55191749	55191872	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR"; exon_number "18";
+chr7	GENCODE	CDS	55191749	55191872	.	+	0	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	exon	55199846	55200018	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR"; exon_number "19";
+chr7	GENCODE	CDS	55199846	55200018	.	+	2	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	exon	55207956	55208143	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR"; exon_number "20";
+chr7	GENCODE	CDS	55207956	55208143	.	+	2	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	exon	55209971	55210131	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR"; exon_number "21";
+chr7	GENCODE	CDS	55209971	55210100	.	+	2	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	stop_codon	55210101	55210103	.	+	0	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+chr7	GENCODE	three_prime_UTR	55210104	55210131	.	+	.	gene_id "ENSG00000146648"; transcript_id "ENST00000275493"; gene_name "EGFR";
+#
+# BRCA1 (chr17:43,044,295-43,125,364) - Breast/ovarian cancer
+chr17	GENCODE	gene	43044295	43125364	.	-	.	gene_id "ENSG00000012048"; gene_name "BRCA1"; gene_type "protein_coding";
+chr17	GENCODE	transcript	43044295	43125364	.	-	.	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	exon	43044295	43044615	.	-	.	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1"; exon_number "24";
+chr17	GENCODE	CDS	43044295	43044615	.	-	0	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	exon	43045677	43045802	.	-	.	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1"; exon_number "23";
+chr17	GENCODE	CDS	43045677	43045802	.	-	0	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	exon	43047643	43047703	.	-	.	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1"; exon_number "22";
+chr17	GENCODE	CDS	43047643	43047703	.	-	0	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	exon	43049120	43049194	.	-	.	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1"; exon_number "21";
+chr17	GENCODE	CDS	43049120	43049194	.	-	1	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	start_codon	43124016	43124018	.	-	0	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+chr17	GENCODE	stop_codon	43044297	43044299	.	-	0	gene_id "ENSG00000012048"; transcript_id "ENST00000357654"; gene_name "BRCA1";
+#
+# BRCA2 (chr13:32,315,086-32,400,266) - Breast/ovarian cancer
+chr13	GENCODE	gene	32315086	32400266	.	+	.	gene_id "ENSG00000139618"; gene_name "BRCA2"; gene_type "protein_coding";
+chr13	GENCODE	transcript	32315086	32400266	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	exon	32315086	32315145	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2"; exon_number "1";
+chr13	GENCODE	five_prime_UTR	32315086	32315120	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	start_codon	32315121	32315123	.	+	0	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	CDS	32315121	32315145	.	+	0	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	exon	32316422	32316527	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2"; exon_number "2";
+chr13	GENCODE	CDS	32316422	32316527	.	+	1	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	exon	32319077	32319325	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2"; exon_number "3";
+chr13	GENCODE	CDS	32319077	32319325	.	+	2	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	exon	32326101	32326150	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2"; exon_number "10";
+chr13	GENCODE	CDS	32326101	32326145	.	+	2	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	stop_codon	32326146	32326148	.	+	0	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+chr13	GENCODE	three_prime_UTR	32326149	32326150	.	+	.	gene_id "ENSG00000139618"; transcript_id "ENST00000380152"; gene_name "BRCA2";
+#
+# PIK3CA (chr3:179,148,114-179,240,093) - PI3K pathway
+chr3	GENCODE	gene	179148114	179240093	.	+	.	gene_id "ENSG00000121879"; gene_name "PIK3CA"; gene_type "protein_coding";
+chr3	GENCODE	transcript	179148114	179240093	.	+	.	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA";
+chr3	GENCODE	exon	179148114	179148252	.	+	.	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA"; exon_number "1";
+chr3	GENCODE	CDS	179148114	179148252	.	+	0	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA";
+chr3	GENCODE	exon	179199765	179199872	.	+	.	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA"; exon_number "9";
+chr3	GENCODE	CDS	179199765	179199872	.	+	0	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA";
+chr3	GENCODE	exon	179218294	179218476	.	+	.	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA"; exon_number "20";
+chr3	GENCODE	CDS	179218294	179218476	.	+	0	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA";
+chr3	GENCODE	start_codon	179148114	179148116	.	+	0	gene_id "ENSG00000121879"; transcript_id "ENST00000263967"; gene_name "PIK3CA";
+#
+# BRAF (chr7:140,719,327-140,924,929) - MAPK pathway
+chr7	GENCODE	gene	140719327	140924929	.	-	.	gene_id "ENSG00000157764"; gene_name "BRAF"; gene_type "protein_coding";
+chr7	GENCODE	transcript	140719327	140924929	.	-	.	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF";
+chr7	GENCODE	exon	140719327	140719446	.	-	.	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF"; exon_number "18";
+chr7	GENCODE	CDS	140719327	140719446	.	-	0	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF";
+chr7	GENCODE	exon	140753336	140753427	.	-	.	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF"; exon_number "15";
+chr7	GENCODE	CDS	140753336	140753427	.	-	2	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF";
+chr7	GENCODE	start_codon	140924753	140924755	.	-	0	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF";
+chr7	GENCODE	stop_codon	140719329	140719331	.	-	0	gene_id "ENSG00000157764"; transcript_id "ENST00000288602"; gene_name "BRAF";
+#
+# APC (chr5:112,707,498-112,846,239) - Colorectal cancer
+chr5	GENCODE	gene	112707498	112846239	.	+	.	gene_id "ENSG00000134982"; gene_name "APC"; gene_type "protein_coding";
+chr5	GENCODE	transcript	112707498	112846239	.	+	.	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC";
+chr5	GENCODE	exon	112707498	112707624	.	+	.	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC"; exon_number "1";
+chr5	GENCODE	CDS	112707498	112707624	.	+	0	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC";
+chr5	GENCODE	exon	112769811	112769874	.	+	.	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC"; exon_number "15";
+chr5	GENCODE	CDS	112769811	112769874	.	+	0	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC";
+chr5	GENCODE	exon	112772550	112772655	.	+	.	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC"; exon_number "16";
+chr5	GENCODE	CDS	112772550	112772655	.	+	1	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC";
+chr5	GENCODE	start_codon	112707498	112707500	.	+	0	gene_id "ENSG00000134982"; transcript_id "ENST00000257430"; gene_name "APC";
