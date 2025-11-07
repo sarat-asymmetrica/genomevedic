@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # Redis for session state management
+  redis:
+    image: redis:7-alpine
+    container_name: genomevedic-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - genomevedic-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Collaboration server
+  collab-server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.collab
+    container_name: genomevedic-collab
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - REDIS_ADDR=redis:6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - BASE_URL=http://localhost:5173
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - genomevedic-network
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  genomevedic-network:
+    driver: bridge

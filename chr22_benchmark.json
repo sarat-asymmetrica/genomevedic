@@ -1,0 +1,102 @@
+{
+  "dataset_id": "chr22",
+  "decompression": {
+    "compressed_size": 13774211,
+    "decompressed_size": 137767057,
+    "decompression_time": 0.4464151859283447,
+    "decompression_speed_mbps": 294.311009233599,
+    "compression_ratio": 0.9000181081025778
+  },
+  "lod_benchmarks": {
+    "3G": [
+      {
+        "lod_level": 0,
+        "particles": 5000,
+        "load_time": 0.18913901774330139,
+        "download_time": 0.1721776375,
+        "parse_time": 0.01696138024330139
+      },
+      {
+        "lod_level": 1,
+        "particles": 50000,
+        "load_time": 1.891390177433014,
+        "download_time": 1.7217763750000001,
+        "parse_time": 0.16961380243301394
+      },
+      {
+        "lod_level": 2,
+        "particles": 500000,
+        "load_time": 18.91390177433014,
+        "download_time": 17.21776375,
+        "parse_time": 1.6961380243301392
+      },
+      {
+        "lod_level": 3,
+        "particles": 1000000,
+        "load_time": 37.82780354866028,
+        "download_time": 34.4355275,
+        "parse_time": 3.3922760486602783
+      }
+    ],
+    "4G": [
+      {
+        "lod_level": 0,
+        "particles": 5000,
+        "load_time": 0.0715220458928528,
+        "download_time": 0.055096844000000006,
+        "parse_time": 0.016425201892852785
+      },
+      {
+        "lod_level": 1,
+        "particles": 50000,
+        "load_time": 0.7152204589285278,
+        "download_time": 0.55096844,
+        "parse_time": 0.16425201892852784
+      },
+      {
+        "lod_level": 2,
+        "particles": 500000,
+        "load_time": 7.152204589285279,
+        "download_time": 5.5096844,
+        "parse_time": 1.6425201892852783
+      },
+      {
+        "lod_level": 3,
+        "particles": 1000000,
+        "load_time": 14.304409178570557,
+        "download_time": 11.0193688,
+        "parse_time": 3.2850403785705566
+      }
+    ],
+    "Fiber": [
+      {
+        "lod_level": 0,
+        "particles": 5000,
+        "load_time": 0.022277900294699095,
+        "download_time": 0.0055096844,
+        "parse_time": 0.016768215894699096
+      },
+      {
+        "lod_level": 1,
+        "particles": 50000,
+        "load_time": 0.222779002946991,
+        "download_time": 0.055096844000000006,
+        "parse_time": 0.16768215894699098
+      },
+      {
+        "lod_level": 2,
+        "particles": 500000,
+        "load_time": 2.22779002946991,
+        "download_time": 0.55096844,
+        "parse_time": 1.6768215894699097
+      },
+      {
+        "lod_level": 3,
+        "particles": 1000000,
+        "load_time": 4.45558005893982,
+        "download_time": 1.10193688,
+        "parse_time": 3.3536431789398193
+      }
+    ]
+  }
+}

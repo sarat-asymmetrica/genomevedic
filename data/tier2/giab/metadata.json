@@ -1,0 +1,34 @@
+{
+  "dataset": "Genome in a Bottle (GIAB)",
+  "sample": "NA12878 (HG001)",
+  "consortium": "NIST/FDA/NHGRI",
+  "reference": "GRCh38",
+  "description": "High-confidence variant calls and regions for benchmarking genomic analysis pipelines",
+  "technologies": [
+    "Illumina",
+    "PacBio",
+    "10X Genomics",
+    "Oxford Nanopore",
+    "Complete Genomics",
+    "SOLiD"
+  ],
+  "variant_types": [
+    "SNPs",
+    "Indels",
+    "Structural variants"
+  ],
+  "confidence_regions": "Regions where all technologies agree",
+  "use_cases": [
+    "Benchmarking variant callers",
+    "Quality control",
+    "Method validation",
+    "Clinical testing validation"
+  ],
+  "references": [
+    "Zook JM et al. (2014) Integrating human sequence data sets provides a resource of benchmark SNP and indel genotype calls.",
+    "Zook JM et al. (2019) An open resource for accurately benchmarking small variant and reference calls."
+  ],
+  "url": "https://www.nist.gov/programs-projects/genome-bottle",
+  "ftp": "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/",
+  "data_type": "simulated_for_demonstration"
+}

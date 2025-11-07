@@ -1,0 +1,11 @@
+##fileformat=VCFv4.2
+##source=GenomeVedicSimulatedLTEE
+##reference=REL606
+##INFO=<ID=GEN,Number=1,Type=Integer,Description="Generation number">
+##INFO=<ID=TYPE,Number=1,Type=String,Description="Mutation type">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	REL606_gen2000
+NC_012967.1	1010000	.	A	T	100	PASS	GEN=2000;TYPE=SNP	GT	1/1
+NC_012967.1	1020000	.	A	T	100	PASS	GEN=2000;TYPE=SNP	GT	1/1
+NC_012967.1	1030000	.	A	T	100	PASS	GEN=2000;TYPE=SNP	GT	1/1
+NC_012967.1	1040000	.	A	T	100	PASS	GEN=2000;TYPE=SNP	GT	1/1
