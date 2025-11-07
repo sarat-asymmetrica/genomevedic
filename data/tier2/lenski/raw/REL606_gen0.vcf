@@ -1,0 +1,7 @@
+##fileformat=VCFv4.2
+##source=GenomeVedicSimulatedLTEE
+##reference=REL606
+##INFO=<ID=GEN,Number=1,Type=Integer,Description="Generation number">
+##INFO=<ID=TYPE,Number=1,Type=String,Description="Mutation type">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	REL606_gen0

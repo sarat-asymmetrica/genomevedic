@@ -1,0 +1,33 @@
+{
+  "experiment": "Long-Term Evolution Experiment (LTEE)",
+  "organism": "Escherichia coli B",
+  "strain": "REL606",
+  "principal_investigator": "Richard Lenski",
+  "start_date": "1988-02-15",
+  "generations_total": 50000,
+  "timepoints": [
+  "0",
+  "2000",
+  "5000",
+  "10000",
+  "15000",
+  "20000",
+  "30000",
+  "40000",
+  "50000"
+],
+  "population_count": 12,
+  "description": "Longest-running evolution experiment. E. coli populations grown for 50,000+ generations, showing adaptation and evolutionary dynamics.",
+  "key_findings": [
+    "Fitness improvement over time",
+    "Citrate+ mutation (Cit+) at ~31,500 generations",
+    "Parallel evolution across populations",
+    "Diminishing returns epistasis"
+  ],
+  "references": [
+    "Lenski RE et al. (1991) Long-term experimental evolution in Escherichia coli.",
+    "Blount ZD et al. (2012) Historical contingency and the evolution of a key innovation."
+  ],
+  "source": "https://barricklab.org/twiki/bin/view/Lab/EvolvingE.coliStrains",
+  "data_type": "simulated_for_demonstration"
+}

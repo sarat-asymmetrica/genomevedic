@@ -16,14 +16,18 @@ import (
 	"time"
 
 	"genomevedic/backend/internal/ai"
+	"genomevedic/backend/internal/crispr"
+	"genomevedic/backend/internal/integrations"
 )
 
 // Server represents the API server
 type Server struct {
-	nlEngine         *ai.NLQueryEngine
+	nlEngine           *ai.NLQueryEngine
 	variantInterpreter *ai.ChatGPTInterpreter
-	port             int
-	mux              *http.ServeMux
+	crisprHandler      *crispr.Handler
+	galaxyHandlers     *integrations.GalaxyHandlers
+	port               int
+	mux                *http.ServeMux
 }
 
 // NewServer creates a new API server
@@ -44,9 +48,24 @@ func NewServer(port int) (*Server, error) {
 		return nil, fmt.Errorf("failed to create variant interpreter: %w", err)
 	}
 
+	// Create CRISPR handler
+	crisprHandler := crispr.NewHandler()
+
+	// Create Galaxy integration handlers
+	galaxyOAuthConfig := &integrations.GalaxyOAuthConfig{
+		ClientID:     os.Getenv("GALAXY_CLIENT_ID"),
+		ClientSecret: os.Getenv("GALAXY_CLIENT_SECRET"),
+		RedirectURL:  os.Getenv("GALAXY_REDIRECT_URL"),
+		GalaxyURL:    getEnvOrDefault("GALAXY_URL", "https://usegalaxy.org"),
+		Scopes:       []string{"read", "write"},
+	}
+	galaxyHandlers := integrations.NewGalaxyHandlers(1000000, galaxyOAuthConfig)
+
 	server := &Server{
 		nlEngine:           nlEngine,
 		variantInterpreter: variantInterpreter,
+		crisprHandler:      crisprHandler,
+		galaxyHandlers:     galaxyHandlers,
 		port:               port,
 		mux:                http.NewServeMux(),
 	}
@@ -58,13 +77,23 @@ func NewServer(port int) (*Server, error) {
 
 // registerRoutes registers all HTTP routes
 func (s *Server) registerRoutes() {
-	// CORS middleware
+	// Natural language query routes
 	s.mux.HandleFunc("/api/v1/query/natural-language", s.corsMiddleware(s.handleNaturalLanguageQuery))
 	s.mux.HandleFunc("/api/v1/query/examples", s.corsMiddleware(s.handleGetExamples))
+
+	// Variant explanation routes
 	s.mux.HandleFunc("/api/v1/variants/explain", s.corsMiddleware(s.handleExplainVariant))
 	s.mux.HandleFunc("/api/v1/variants/batch-explain", s.corsMiddleware(s.handleBatchExplainVariants))
+
+	// Cache and health routes
 	s.mux.HandleFunc("/api/v1/cache/stats", s.corsMiddleware(s.handleCacheStats))
 	s.mux.HandleFunc("/api/v1/health", s.corsMiddleware(s.handleHealth))
+
+	// CRISPR design routes
+	s.crisprHandler.RegisterRoutes(s.mux, s.corsMiddleware)
+
+	// Galaxy integration routes
+	s.galaxyHandlers.RegisterRoutes(s.mux)
 }
 
 // corsMiddleware adds CORS headers
@@ -315,4 +344,12 @@ func (s *Server) Shutdown(ctx context.Context) error {
 
 	// In a real implementation with http.Server, we would use server.Shutdown(ctx)
 	return nil
+}
+
+// getEnvOrDefault returns environment variable value or default if not set
+func getEnvOrDefault(key, defaultValue string) string {
+	if value := os.Getenv(key); value != "" {
+		return value
+	}
+	return defaultValue
 }

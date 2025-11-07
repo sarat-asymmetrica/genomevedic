@@ -1,0 +1,194 @@
+<tool id="genomevedic_visualizer" name="GenomeVedic VR Visualizer" version="1.0.0" profile="21.01">
+    <description>Visualize BAM files in 3D VR environment with Vedic mathematics-based color mapping</description>
+
+    <requirements>
+        <requirement type="package" version="3.9">python</requirement>
+        <container type="docker">genomevedic/galaxy-integration:latest</container>
+    </requirements>
+
+    <command detect_errors="exit_code"><![CDATA[
+        python '$__tool_directory__/genomevedic_wrapper.py'
+            --bam-input '$bam_input'
+            --genome-build '$bam_input.metadata.dbkey'
+            --visualization-mode '$visualization_mode'
+            --quality-threshold '$quality_threshold'
+            --region '$region'
+            --session-name '$session_name'
+            --api-endpoint '$api_endpoint'
+            #if $api_key:
+                --api-key '$api_key'
+            #end if
+            #if $advanced.use_lod:
+                --enable-lod
+                --lod-levels '$advanced.lod_levels'
+            #end if
+            #if $advanced.enable_multiplayer:
+                --enable-multiplayer
+            #end if
+            --output-url '$output_url'
+            --output-stats '$output_stats'
+            --output-log '$output_log'
+    ]]></command>
+
+    <inputs>
+        <!-- Primary BAM Input -->
+        <param name="bam_input" type="data" format="bam"
+               label="Input BAM file"
+               help="Aligned sequencing reads in BAM format" />
+
+        <!-- Visualization Mode -->
+        <param name="visualization_mode" type="select"
+               label="Visualization Mode"
+               help="Choose how to visualize the genome data">
+            <option value="particles" selected="true">Particle System (Default)</option>
+            <option value="density">Density Heatmap</option>
+            <option value="coverage">Coverage Plot</option>
+            <option value="mutations">Mutation Hotspots</option>
+        </param>
+
+        <!-- Quality Threshold -->
+        <param name="quality_threshold" type="integer" value="20" min="0" max="60"
+               label="Mapping Quality Threshold"
+               help="Minimum MAPQ score for reads to include (0-60)" />
+
+        <!-- Genomic Region -->
+        <param name="region" type="text" value="" optional="true"
+               label="Genomic Region (optional)"
+               help="Specific region to visualize (e.g., chr1:1000000-2000000). Leave empty for whole genome" />
+
+        <!-- Session Configuration -->
+        <param name="session_name" type="text" value="Galaxy BAM Visualization"
+               label="Session Name"
+               help="Name for this GenomeVedic visualization session" />
+
+        <!-- API Configuration -->
+        <param name="api_endpoint" type="text" value="https://genomevedic.io/api/v1"
+               label="GenomeVedic API Endpoint"
+               help="GenomeVedic server API endpoint" />
+
+        <param name="api_key" type="text" value="" optional="true"
+               label="API Key (optional)"
+               help="Your GenomeVedic API key for authentication" />
+
+        <!-- Advanced Options -->
+        <section name="advanced" title="Advanced Visualization Options" expanded="false">
+            <param name="use_lod" type="boolean" checked="true"
+                   label="Enable Level-of-Detail (LOD)"
+                   help="Optimize performance for large datasets using LOD rendering" />
+
+            <param name="lod_levels" type="integer" value="5" min="1" max="10"
+                   label="LOD Levels"
+                   help="Number of detail levels for LOD system (1-10)" />
+
+            <param name="enable_multiplayer" type="boolean" checked="false"
+                   label="Enable Multiplayer Mode"
+                   help="Allow collaborative visualization with other researchers" />
+
+            <param name="particle_limit" type="integer" value="1000000" min="10000"
+                   label="Maximum Particles"
+                   help="Maximum number of particles to render (higher = more detail but slower)" />
+
+            <param name="color_scheme" type="select" label="Color Scheme">
+                <option value="vedic" selected="true">Vedic Digital Root (Default)</option>
+                <option value="quality">Base Quality</option>
+                <option value="gc_content">GC Content</option>
+                <option value="mutation_freq">Mutation Frequency</option>
+            </param>
+        </section>
+    </inputs>
+
+    <outputs>
+        <!-- Session URL Output -->
+        <data name="output_url" format="txt" label="GenomeVedic Session URL" />
+
+        <!-- Statistics Output -->
+        <data name="output_stats" format="json" label="Visualization Statistics" />
+
+        <!-- Processing Log -->
+        <data name="output_log" format="txt" label="Processing Log" />
+    </outputs>
+
+    <tests>
+        <!-- Test Case 1: Basic BAM visualization -->
+        <test>
+            <param name="bam_input" value="test_sample.bam" />
+            <param name="visualization_mode" value="particles" />
+            <param name="quality_threshold" value="20" />
+            <output name="output_url" file="expected_url.txt" />
+            <output name="output_stats" file="expected_stats.json" />
+        </test>
+
+        <!-- Test Case 2: Region-specific visualization -->
+        <test>
+            <param name="bam_input" value="test_sample.bam" />
+            <param name="region" value="chr1:1000000-2000000" />
+            <param name="visualization_mode" value="mutations" />
+            <output name="output_url" file="expected_region_url.txt" />
+        </test>
+    </tests>
+
+    <help><![CDATA[
+**GenomeVedic VR Visualizer**
+
+This tool integrates Galaxy workflows with GenomeVedic's 3D VR genome visualization platform.
+
+**What it does:**
+
+GenomeVedic transforms BAM alignment files into immersive 3D visualizations viewable in VR or web browsers.
+The tool uses Vedic mathematics principles for color mapping, creating intuitive visual patterns that help
+researchers identify genomic features, mutations, and structural variations.
+
+**Key Features:**
+
+* **3D Particle System**: Each read rendered as a colored particle based on sequence properties
+* **Vedic Color Mapping**: Digital root algorithm reveals patterns in GC content and mutations
+* **VR Support**: View genomes in virtual reality using WebXR-compatible headsets
+* **Real-time Collaboration**: Multiple researchers can explore the same genome simultaneously
+* **Level-of-Detail**: Optimized rendering for datasets up to billions of reads
+* **Mutation Hotspots**: Automatic detection and highlighting of high-mutation regions
+
+**Inputs:**
+
+* **BAM file**: Aligned sequencing reads (must be coordinate-sorted and indexed)
+* **Visualization Mode**: Choose between particles, density maps, coverage plots, or mutation focus
+* **Quality Threshold**: Filter reads by mapping quality (MAPQ score)
+* **Region**: Optionally focus on specific genomic regions
+
+**Outputs:**
+
+* **Session URL**: Direct link to open visualization in GenomeVedic web viewer or VR
+* **Statistics**: JSON file with read counts, quality metrics, and performance data
+* **Processing Log**: Detailed log of import and conversion process
+
+**Performance:**
+
+* Typical import time: <30 seconds for 1 GB BAM file
+* Maximum recommended file size: 10 GB (larger files use streaming mode)
+* VR headsets supported: Meta Quest, HTC Vive, Valve Index, WebXR-compatible devices
+
+**Citation:**
+
+If you use GenomeVedic in your research, please cite:
+GenomeVedic: Three-Dimensional Vedic Visualization of Genomic Data (2024)
+
+**More Information:**
+
+* Homepage: https://genomevedic.io
+* Documentation: https://docs.genomevedic.io/galaxy-integration
+* Source Code: https://github.com/genomevedic/genomevedic
+* Support: support@genomevedic.io
+
+    ]]></help>
+
+    <citations>
+        <citation type="bibtex">
+@article{genomevedic2024,
+    title={GenomeVedic: Three-Dimensional Vedic Visualization of Genomic Data},
+    author={GenomeVedic Development Team},
+    journal={Bioinformatics},
+    year={2024},
+    publisher={Oxford University Press}
+}
+        </citation>
+    </citations>
+</tool>
