@@ -60,3 +60,15 @@ go.work.sum
 # Keep sample files
 !data/ecoli_genome.fasta
 !data/cosmic_signatures.csv
+
+# Large data files (host on CDN instead)
+data/raw/*.gz
+data/raw/*.vcf
+data/raw/*.gtf
+data/tier1/*.json
+data/tier1/*.particles.json
+data/tier1/*.zst
+
+# Keep only metadata and small files
+!data/LICENSE.md
+!data/README.md
